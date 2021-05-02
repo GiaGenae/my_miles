@@ -1,7 +1,13 @@
+<% if flash[:error] %>
+    <div class="errors flash fatal">
+        <h4 class="error"><%= flash[:error] %></h4>
+    </div>
+<% end %>
+
 <h2>Login</h2>
 
 <div class="form-container"><div data-aos="fade-up" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-once="false" data-aos-anchor-placement="top-center"></div>
-        <form method="post" action="/sessions/login">
+        <form method="post" action="/login">
             <div class="form-group">
                 <label for ="username">Username</label>
                 <input type="text" name="user[username]" class="form-control" required><br>

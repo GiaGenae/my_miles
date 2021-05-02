@@ -14,4 +14,21 @@ class ApplicationController < Sinatra::Base
     erb :welcome
   end
 
+  helpers do
+    def current_user
+      @current_user ||= User.find(session["user_id"]) if session["user_id"]
+    end
+
+    def logged_in?
+      !!current_user
+    end
+
+    def redirect_if_not_logged_in
+      if !logged_in?
+        flash[:error] = "Please login to access your runs."
+        redirect "/login"
+      end
+    end
+  end
+
 end

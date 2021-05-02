@@ -2,6 +2,7 @@ class RunsController < ApplicationController
 
   # GET: /runs
   get "/runs" do
+    redirect_if_not_logged_in
     erb :"/runs/index.html"
   end
 
