@@ -30,23 +30,44 @@ class RunsController < ApplicationController
 
   get "/runs/:id" do
     redirect_if_not_logged_in
-    @run = Run.find(params["id"])
+    @run = Run.find(params[:id])
     erb :"/runs/show.html"
   end
 
 
-  # GET: /runs/5/edit
+ #UPDATE
+
   get "/runs/:id/edit" do
+    redirect_if_not_logged_in
+    @error_message = params[:error]
+    @run = Run.find(params[:id])
     erb :"/runs/edit.html"
   end
 
-  # PATCH: /runs/5
-  patch "/runs/:id" do
-    redirect "/runs/:id"
+  
+  # patch "/runs/:id" do
+  #   @run = Run.find(params[:id])
+  #   @run.update(params.select{|k|k=="date" || k=="distance" || k=="duration"})
+  #   redirect "/runs/:id"
+  # end
+
+  post "/runs/:id" do
+    redirect_if_not_logged_in
+    @run = Run.find(params[:id])
+    @run.update(date: params["date"], distance: params["distance"], duration: params["duration"])
+    redirect "/runs/#{@run.id}"
+    # unless Run.valid_params?(params)
+    #   redirect "/runs/#{@run.id}/edit?error=invalid run"
+    # end
+    # @run.update(params.select{|k|k=="date" || k=="distance" || k=="duration"})
+    # redirect "/runs/#{@run.id}"
   end
 
   # DELETE: /runs/5/delete
   delete "/runs/:id/delete" do
+    redirect_if_not_logged_in
+    id = params[:id]
+    Run.destroy(id)
     redirect "/runs"
   end
 end
