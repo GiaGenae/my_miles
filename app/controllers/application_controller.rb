@@ -14,6 +14,10 @@ class ApplicationController < Sinatra::Base
     erb :welcome
   end
 
+  error Sinatra::NotFound do
+    erb :"error.html"
+  end
+
   helpers do
     def current_user
       @current_user ||= User.find(session["user_id"]) if session["user_id"]
