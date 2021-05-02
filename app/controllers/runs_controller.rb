@@ -44,30 +44,19 @@ class RunsController < ApplicationController
     erb :"/runs/edit.html"
   end
 
-  
-  # patch "/runs/:id" do
-  #   @run = Run.find(params[:id])
-  #   @run.update(params.select{|k|k=="date" || k=="distance" || k=="duration"})
-  #   redirect "/runs/:id"
-  # end
-
   post "/runs/:id" do
     redirect_if_not_logged_in
     @run = Run.find(params[:id])
     @run.update(date: params["date"], distance: params["distance"], duration: params["duration"])
     redirect "/runs/#{@run.id}"
-    # unless Run.valid_params?(params)
-    #   redirect "/runs/#{@run.id}/edit?error=invalid run"
-    # end
-    # @run.update(params.select{|k|k=="date" || k=="distance" || k=="duration"})
-    # redirect "/runs/#{@run.id}"
   end
 
-  # DELETE: /runs/5/delete
-  delete "/runs/:id/delete" do
+  #DELETE:
+
+  delete "/runs/:id" do
     redirect_if_not_logged_in
-    id = params[:id]
-    Run.destroy(id)
-    redirect "/runs"
+    @run = Run.find(params[:id])
+    @run.destroy
+    redirect '/runs'
   end
 end
