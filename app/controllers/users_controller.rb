@@ -11,8 +11,15 @@ class UsersController < ApplicationController
   end
 
   # POST: /users
-  post "/users" do
-    redirect "/users"
+  post "/users/signup" do
+    user = User.create(params["username"])
+    if user.valid? 
+      flash[:success] = "Successfully created account!"
+      session["user_id"] = user.id
+      redirect '/runs/show'
+    else
+      redirect '/users/signup'
+    end
   end
 
   # # GET: /users/5
