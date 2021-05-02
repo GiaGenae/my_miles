@@ -5,9 +5,9 @@ class UsersController < ApplicationController
     erb :"/users/index.html"
   end
 
-  # GET: /users/new
-  get "/users/new" do
-    erb :"/users/new.html"
+  # GET: /users/signup
+  get "/users/signup" do
+    erb :"/users/signup.html"
   end
 
   # POST: /users
@@ -15,15 +15,15 @@ class UsersController < ApplicationController
     redirect "/users"
   end
 
-  # GET: /users/5
-  get "/users/:id" do
-    erb :"/users/show.html"
-  end
+  # # GET: /users/5
+  # get "/users/:id" do
+  #   erb :"/users/show.html"
+  # end
 
-  # GET: /users/5/edit
-  get "/users/:id/edit" do
-    erb :"/users/edit.html"
-  end
+  # # GET: /users/5/edit
+  # get "/users/:id/edit" do
+  #   erb :"/users/edit.html"
+  # end
 
   # PATCH: /users/5
   patch "/users/:id" do
