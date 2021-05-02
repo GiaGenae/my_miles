@@ -33,6 +33,12 @@ class ApplicationController < Sinatra::Base
         redirect "/login"
       end
     end
+
+    # def not_the_runner?(obj)
+    #   if current_user != obj.user
+    #     flash[:error] = "You do not have permissions to view that page silly."
+    #   end
+    # end
   end
 
 end

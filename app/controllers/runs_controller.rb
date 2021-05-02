@@ -1,25 +1,39 @@
 class RunsController < ApplicationController
 
-  # GET: /runs
+  before ("/runs") do
+    redirect_if_not_logged_in if request.path_info != "/login"
+  end
+  #CREATE
+
   get "/runs" do
     redirect_if_not_logged_in
+    @runs = Run.all
     erb :"/runs/index.html"
   end
 
-  # GET: /runs/new
   get "/runs/new" do
+    redirect_if_not_logged_in
     erb :"/runs/new.html"
   end
 
-  # POST: /runs
   post "/runs" do
-    redirect "/runs"
+    run = Run.create(params["run"])
+    if run.valid?
+      redirect "/runs"
+    else
+      flash[:error] = run.errors.full_messages.join(", ")
+      redirect "/runs/new"
+    end
   end
 
-  # GET: /runs/5
+  #READ
+
   get "/runs/:id" do
+    redirect_if_not_logged_in
+    @run = Run.find(params["id"])
     erb :"/runs/show.html"
   end
+
 
   # GET: /runs/5/edit
   get "/runs/:id/edit" do
