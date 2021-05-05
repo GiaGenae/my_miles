@@ -8,7 +8,7 @@ end
 
 use Rack::MethodOverride
 
-run ApplicationController
 use SessionsController
-use RunsController
 use UsersController
+use RunsController
+run ApplicationController

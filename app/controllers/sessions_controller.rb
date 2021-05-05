@@ -12,7 +12,6 @@ class SessionsController < ApplicationController
     user = User.find_by_username(params["user"]["username"])
     if user && user.authenticate(params["user"]["password"])
       session["user_id"] = user.id
-      flash[:success] = "You are now logged in!"
       redirect "/runs"
     else
       flash[:error] = "Invalid credentials."

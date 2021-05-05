@@ -14,7 +14,6 @@ class UsersController < ApplicationController
   post "/users/signup" do
     user = User.create(params["user"])
     if user.valid? 
-      flash[:success] = "Successfully created account!"
       session["user_id"] = user.id
       redirect '/runs/new'
     else
