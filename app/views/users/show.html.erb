@@ -1,1 +1,7 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<p> Hello, <%= @user.username %>
+<br>
+<% @user.runs.each do |run| %>
+    <ul>
+        <li><a href="/runs/<%=run.id%>"</a><li>
+    </ul>
+<% end %>

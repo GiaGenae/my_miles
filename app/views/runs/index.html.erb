@@ -2,13 +2,12 @@
 
 <% @runs.each do |run| %>
     <h2>Run <%= run.id %>
-    <h4>Date: <%= run.date %></h4>
-    <h4>Distance (miles): <%= run.distance %></h4>
-    <h4>Duration (hours): <%= run.duration %></h4>
+    <h3>Date: <%= run.date %></h3>
+    <h3>Distance (miles): <%= run.distance %></h3>
+    <h3>Duration (hours): <%= run.duration %></h3>
     <a href="/runs/<%=run.id%>/edit">Edit</a><br>
     <br>
 <% end %>
-<br>
 <br>
 <br>
 

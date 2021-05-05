@@ -54,9 +54,8 @@ class RunsController < ApplicationController
   #DELETE:
 
   delete "/runs/:id" do
-    redirect_if_not_logged_in
-    @run = Run.find(params[:id])
+    @run = Run.find_by(id:params[:id])
     @run.destroy
-    redirect '/runs'
+    redirect "/runs"
   end
 end
