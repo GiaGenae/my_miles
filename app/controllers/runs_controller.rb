@@ -7,7 +7,7 @@ class RunsController < ApplicationController
 
   get "/runs" do
     redirect_if_not_logged_in
-    @runs = Run.all
+    @runs=Run.where(user_id: current_user.id)
     erb :"/runs/index.html"
   end
 
