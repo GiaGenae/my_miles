@@ -18,7 +18,7 @@ class RunsController < ApplicationController
 
   get '/runs/new' do
     if logged_in?
-      erb :'/runs/new'
+      erb :'/runs/new.html'
     else
       redirect "/login"
     end
