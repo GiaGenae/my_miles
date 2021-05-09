@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 
   get "/login" do
     redirect "/runs" if logged_in?
-    erb :"/sessions/login.html"
+    erb :"/users/login.html"
   end
 
   post "/login" do

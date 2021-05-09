@@ -3,3 +3,13 @@
   <h4><b><%= @run.duration %></b> Hours</h4>
   <a href="/runs/<%=run.id%>/edit" style="text-decoration: none;">Edit</a> 
 <br> -->
+
+
+if logged_in?
+      @run = Run.find_by_id(params[:id])
+      if @run.user_id == current_user.id
+        erb :'runs/edit.html'
+      else
+        redirect "/runs"
+      end
+    end
