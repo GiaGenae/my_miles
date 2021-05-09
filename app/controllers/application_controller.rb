@@ -34,6 +34,13 @@ class ApplicationController < Sinatra::Base
       end
     end
 
+    def redirect_if_not_authorized
+      @run = Run.find_by_id(params[:id])
+      if current_user != @run.user
+        redirect '/runs'
+      end
+    end
+    
     def get_run
       @run = Run.find_by(params[:id])
     end
