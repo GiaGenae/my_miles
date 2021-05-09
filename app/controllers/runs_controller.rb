@@ -8,8 +8,13 @@ class RunsController < ApplicationController
 
   get "/runs" do
     redirect_if_not_logged_in
-    @runs = Run.all
-    erb :"/runs/index.html"
+    if logged_in?
+      @user = current_user
+      @runs = current_user.runs
+      erb :"/runs/index.html"
+    else
+      redirect "/login"
+    end
   end
 
   get "/runs/new" do
@@ -18,12 +23,11 @@ class RunsController < ApplicationController
   end
 
   post "/runs" do
-    run = current_user.runs.create(date: params[:run][:date],distance: params[:run][:distance],duration: params[:run][:duration])
-    if run.valid?
-      redirect "/runs"
+    @s = current_user.runs.build(params)
+    if @s.save
+      redirect "/runs/index.html"
     else
-      flash[:error] = run.errors.full_messages.join(", ")
-      redirect "/runs/new"
+      erb :"/runs/new.html"
     end
   end
 
@@ -45,15 +49,14 @@ class RunsController < ApplicationController
     erb :"/runs/edit.html"
   end
 
-  post "/runs/:id" do
+  patch "/runs/:id" do
     redirect_if_not_logged_in
     get_run
-    run.update(date: params["date"], distance: params["distance"], duration: params["duration"])
-    redirect "/runs/#{params[:id]}"
-  end
-
-  patch " " do
-    
+    unless Run.valid_params?(params)
+      redirect "/runs/#{@run.id}/edit?error=invalid run"
+    end
+    @run.update(params.select{|k|k=="date" || k=="distance"} || k=="date")
+    redirect "/runs/#{@run.id}"
   end
 
   #DELETE:
