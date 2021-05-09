@@ -6,12 +6,11 @@ class SessionsController < ApplicationController
     erb :"/sessions/login.html"
   end
 
-
   # POST: /sessions
   post "/login" do
     user = User.find_by_username(params["user"]["username"])
     if user && user.authenticate(params["user"]["password"])
-      session["user_id"] = user.id
+      session[:id] = user.id
       redirect "/runs"
     else
       flash[:error] = "Invalid credentials."

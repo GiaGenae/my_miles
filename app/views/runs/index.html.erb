@@ -6,15 +6,20 @@
 
 
 <% @runs.each do |run| %>
-    <h2>Run <%= run.id %>
-    <h3>Date: <%= run.date %></h3>
-    <h3>Distance (miles): <%= run.distance %></h3>
-    <h3>Duration (hours): <%= run.duration %></h3>
-    <a href="/runs/<%=run.id%>/edit">Edit</a>
-    <br>
+	<h4>Date: <i><%= run.date %></i></h4>
+  <h4>Distance: <b><%= run.distance %></b> Miles</h4>
+  <h4>Duration: <b><%= run.duration %></b> Hours</h4>
+  <!-- <h4>Creator: <b><%= run.user %></b> Hours</h4> -->
+  <a href="/runs/<%=run.id%>/edit" style="text-decoration: none;">Edit</a> 
+<br>
+<br>
 <% end %>
-<br>
-<br>
 
 
-<a href="/logout" class="btn btn-success">Logout</a>
+
+
+
+
+
+
+<a href="/logout" class="btn btn-success">Logout</a> 

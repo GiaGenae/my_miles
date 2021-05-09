@@ -1,0 +1,5 @@
+<h4><i><%= @run.date %></i></h4>
+  <h4><b><%= @run.distance %></b> Miles</h4>
+  <h4><b><%= @run.duration %></b> Hours</h4>
+  <a href="/runs/<%=run.id%>/edit" style="text-decoration: none;">Edit</a> 
+<br> -->

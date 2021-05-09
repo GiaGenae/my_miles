@@ -31,7 +31,7 @@ class RunsController < ApplicationController
 
   get "/runs/:id" do
     redirect_if_not_logged_in
-    @run = Run.find_by(params[:id])
+    get_run
     erb :"/runs/show.html"
   end
 
@@ -41,13 +41,13 @@ class RunsController < ApplicationController
   get "/runs/:id/edit" do
     redirect_if_not_logged_in
     @error_message = params[:error]
-    @run = Run.find_by(params[:id])
+    get_run
     erb :"/runs/edit.html"
   end
 
   post "/runs/:id" do
     redirect_if_not_logged_in
-    run = Run.find_by(params[:id])
+    get_run
     run.update(date: params["date"], distance: params["distance"], duration: params["duration"])
     redirect "/runs/#{params[:id]}"
   end
@@ -59,7 +59,7 @@ class RunsController < ApplicationController
   #DELETE:
 
   delete "/runs/:id" do
-    @run = Run.find_by(params[:id])
+    get_run
     @run.destroy
     redirect "/runs"
   end

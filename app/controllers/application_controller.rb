@@ -20,7 +20,7 @@ class ApplicationController < Sinatra::Base
 
   helpers do
     def current_user
-      @current_user ||= User.find(session["user_id"]) if session["user_id"]
+      @current_user ||= User.find(session[:id]) if session[:id]
     end
 
     def logged_in?
@@ -32,6 +32,10 @@ class ApplicationController < Sinatra::Base
         flash[:error] = "Please login to access your runs."
         redirect "/login"
       end
+    end
+
+    def get_run
+      @run = Run.find_by(params[:id])
     end
   end
 
