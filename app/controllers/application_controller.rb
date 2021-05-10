@@ -14,17 +14,9 @@ class ApplicationController < Sinatra::Base
     erb :welcome
   end
 
-  error Sinatra::NotFound do
-    erb :"error.html"
-  end
-
   helpers do
-    def current_user
-      @current_user ||= User.find(session[:id]) if session[:id]
-    end
-
     def logged_in?
-      !!current_user
+      !!session[:user_id]
     end
 
     def redirect_if_not_logged_in
@@ -34,15 +26,15 @@ class ApplicationController < Sinatra::Base
       end
     end
 
-    def redirect_if_not_authorized
-      @run = Run.find_by_id(params[:id])
-      if current_user != @run.user
-        redirect '/runs'
-      end
+    def current_user
+      @user ||= User.find(session[:user_id])
     end
-    
-    def get_run
-      @run = Run.find_by(params[:id])
+  end
+
+  def redirect_if_not_authorized
+    @run = Run.find_by_id(params[:id])
+    if current_user != @run.user
+      redirect '/runs'
     end
   end
 
