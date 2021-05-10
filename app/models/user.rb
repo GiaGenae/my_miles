@@ -4,4 +4,12 @@ class User < ActiveRecord::Base
     validates :username, uniqueness: true, length: {in: 5..10}
     validates :email, presence: true, uniqueness: true, format: {with: /\A(?<username>[^@\s]+)@((?<domain_name>[-a-z0-9]+)\.(?<domain>[a-z]{2,}))\z/i}
     validates :password, length: {in: 8..100}
+
+    def slug
+        self.username.downcase.split.join("-")
+    end
+      
+    def self.find_by_slug(slug)
+        self.all.find {|object| object.username if object.slug == slug}
+    end
 end
