@@ -1,0 +1,17 @@
+<h1>Welcome, <b style="color: teal;"><%=current_user.username %></b></h1><br>
+
+<h2>All your runs:</h2>
+
+<br>
+<% @runs.each do |run| %>
+  <h4><i><%= run.date %></i></h4>
+  <h3>Distance: <b><%= run.distance %></b> Miles</h3>
+  <h3>Duration: <b><%= run.duration %></b> Hours</h3>
+  <a href="/runs/<%=run.id%>/edit" style="text-decoration: none;">Edit</a> 
+<br>
+<br>
+<% end %>
+  
+<br>
+<br>
+<a href="/logout" class="btn btn-success">Logout</a>

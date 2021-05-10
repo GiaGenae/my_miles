@@ -1,0 +1,14 @@
+<h2>Your Run</h2><br>
+<h3>Date: <%= @run.date %></h3>
+<h3>Distance (miles): <%= @run.distance %></h3>
+<h3>Duration (hours): <%= @run.duration %></h3>
+
+<form action="/runs/<%=@run.id%>/edit" method="get">
+  <input type="submit" value="Edit">
+</form><br>
+
+<form action="/runs/<%=@run.id %>" method="post">
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Delete">
+</form>
+
