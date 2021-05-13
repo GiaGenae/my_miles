@@ -51,6 +51,11 @@ class RunsController < ApplicationController
     redirect "/runs/#{@run.id}"
   end
 
+  get '/runs/leaderboard' do
+    @runs = Run.all
+    erb :"/leaderboard"
+  end
+
   get '/runs/:id' do
     @run = Run.find_by(id: params[:id])
     if logged_in?

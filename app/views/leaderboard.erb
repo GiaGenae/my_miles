@@ -1,0 +1,7 @@
+<h2>Leaderboard<h2>
+<% @runs.each do |run| %>
+  <h4><i><%= run.date %></i></h4>
+  <h3>Distance: <b><%= run.distance %></b> Miles</h3>
+  <h3>Duration: <b><%= run.duration %></b> Hours</h3>
+  <h3>Runner: <b><%= run.user.username %></b></h3>
+<% end %>

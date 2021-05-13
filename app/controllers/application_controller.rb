@@ -10,8 +10,13 @@ class ApplicationController < Sinatra::Base
     register Sinatra::Flash
   end
 
+  
   get "/" do
     erb :welcome
+  end
+
+  error Sinatra::NotFound do
+    erb :"error.html"
   end
 
   helpers do
