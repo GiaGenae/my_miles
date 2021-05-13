@@ -16,7 +16,7 @@ class ApplicationController < Sinatra::Base
   end
 
   error Sinatra::NotFound do
-    erb :"error.html"
+    erb :error
   end
 
   helpers do
